@@ -25,6 +25,7 @@ export const productApi = createApi({
         url: `/product/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["products"],
     }),
   }),
 });
