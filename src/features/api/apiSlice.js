@@ -6,6 +6,8 @@ const productApi = createApi({
     baseUrl: "http://localhost:5000/",
   }),
   endpoints: (build) => ({
-    getProduct: build.query({}),
+    getProduct: build.query({
+      query: () => "product",
+    }),
   }),
 });
