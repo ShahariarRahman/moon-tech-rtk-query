@@ -11,10 +11,10 @@ const AddProduct = () => {
 
   useEffect(() => {
     if (isLoading) {
-      toast.loading("...Loading", { id: "AddProduct" });
+      toast.loading("Posting ... ", { id: "addProduct" });
     }
     if (isSuccess) {
-      toast.success("Success", { id: "AddProduct" });
+      toast.success("Product Added", { id: "addProduct" });
       reset();
     }
   }, [isLoading, isSuccess, reset]);
