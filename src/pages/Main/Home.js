@@ -22,6 +22,9 @@ const Home = () => {
   if (isLoading) {
     content = <h1>Loading ...</h1>;
   }
+  if (isError) {
+    content = <h1>Something Went Wrong</h1>;
+  }
 
   if (products?.length) {
     content = products.map((product) => (
