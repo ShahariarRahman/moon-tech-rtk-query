@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import {
+  useGetProductsQuery,
+  useRemoveProductMutation,
+} from "../../features/api/apiSlice";
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
+  const { data: products, isLoading } = useGetProductsQuery(null, {
+    refetchOnMountOrArgChange: true,
+  });
 
-  useEffect(() => {
-    fetch("http://localhost:5000/product")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+  const [removeProduct, { isLoading: removeLoading }] =
+    useRemoveProductMutation();
+
+  if (isLoading || removeLoading) {
+    return <h1>Loading</h1>;
+  }
 
   return (
     <div className="flex flex-col justify-center items-center h-full w-full ">
@@ -66,7 +73,7 @@ const ProductList = () => {
                   </td>
                   <td className="p-2">
                     <div className="flex justify-center">
-                      <button>
+                      <button onClick={() => removeProduct(_id)}>
                         <svg
                           className="w-8 h-8 hover:text-blue-600 rounded-full hover:bg-gray-100 p-1"
                           fill="none"
