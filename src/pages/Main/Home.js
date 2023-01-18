@@ -1,30 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../../components/ProductCard";
+import { useGetProductsQuery } from "../../features/api/apiSlice";
 import { toggle, toggleBrands } from "../../features/filter/filterSlice";
 
 const Home = () => {
   const { stock, brands } = useSelector((state) => state.filter);
-  const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    fetch("http://localhost:5000/product")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+  const {
+    data: products,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetProductsQuery();
 
   const activeClass = "text-white  bg-indigo-500 border-white";
 
   let content;
+  if (isLoading) {
+    content = <h1>Loading ...</h1>;
+  }
 
-  if (products.length) {
+  if (products?.length) {
     content = products.map((product) => (
       <ProductCard key={product._id} product={product} />
     ));
   }
 
-  if (products.length && (stock || brands.length)) {
+  if (products?.length && (stock || brands.length)) {
     content = products
       .filter((product) => {
         if (stock) {
