@@ -11,6 +11,7 @@ export const productApi = createApi({
       query: () => ({
         url: "/product",
       }),
+      providesTags: ["products"],
     }),
     addProduct: builder.mutation({
       query: (data) => ({
