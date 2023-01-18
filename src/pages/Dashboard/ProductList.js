@@ -5,9 +5,7 @@ import {
 } from "../../features/api/apiSlice";
 
 const ProductList = () => {
-  const { data: products, isLoading } = useGetProductsQuery(null, {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data: products, isLoading } = useGetProductsQuery();
 
   const [removeProduct, { isLoading: removeLoading }] =
     useRemoveProductMutation();

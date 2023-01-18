@@ -14,7 +14,7 @@ const Home = () => {
     isSuccess,
     isError,
     error,
-  } = useGetProductsQuery(null, { refetchOnMountOrArgChange: true });
+  } = useGetProductsQuery();
 
   const activeClass = "text-white  bg-indigo-500 border-white";
 
